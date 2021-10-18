@@ -272,14 +272,14 @@ public class HotelManager {
     	
     	for(int i = 0; i < hotel.length;i++) {
     		if( hotel[i].isFree()  ){
-    			System.out.println("+-----------------------------------------------+");
-    			System.out.println("|	   La chambre " + hotel[i].getId() + " est libre.	        |");
-    			System.out.println("+-----------------------------------------------+");
+    			System.out.println("               +-----------------------------------------------+");
+    			System.out.println("               |	   La chambre " + hotel[i].getId() + " est libre.	       |");
+    			System.out.println("               +-----------------------------------------------+");
     		}
     		else {
-    			System.out.println("+-----------------------------------------------+");
-    			System.out.println("|	   La chambre " + hotel[i].getId() + " est reservee.	        |");
-    			System.out.println("+-----------------------------------------------+");
+    			System.out.println("               +-----------------------------------------------+");
+    			System.out.println("               |	   La chambre " + hotel[i].getId() + " est reservee.	       |");
+    			System.out.println("               +-----------------------------------------------+");
     		}
     	}
     }
@@ -359,16 +359,16 @@ public class HotelManager {
     }
     
     private void menu(String tokenRole, Chambre[] hotel) throws InterruptedException{
-        
-        boolean stop = false;
+    	
+    	boolean stop = false;
 
         Scanner in = new Scanner(System.in);
             
             if(tokenRole.equals("admin")){
             	
-            	while(stop==false){
+            	while(!stop){
             		
-    	            System.out.println("\n\n+---------------------- -! WELCOME TO STEPHANE PLAZA HOTEL !- ----------------------+\n\n  [A]  Etat de L'Hotel");
+    	            System.out.println("+---------------------- -! WELCOME TO STEPHANE PLAZA HOTEL !- ----------------------+\n\n  [A]  Etat de L'Hotel");
     	
     	            System.out.println("  [B]  Afficher le nombre de chambres chambres reservees");
     	
@@ -423,9 +423,45 @@ public class HotelManager {
             
             else{
             	
+            	String asciiHotel = "\n                                      /\\\r\n"
+            			+ "                                      /\\\r\n"
+            			+ "                                      /\\\r\n"
+            			+ "                                      /\\\r\n"
+            			+ "                                    _`=='_\r\n"
+            			+ "                                 _-~......~-_\r\n"
+            			+ "                             _--~............~--_\r\n"
+            			+ "                       __--~~....................~~--__\r\n"
+            			+ "           .___..---~~~................................~~~---..___,\r\n"
+            			+ "            `=.________________________________________________,='\r\n"
+            			+ "               @^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@\r\n"
+            			+ "                        |  |  I   I   II   I   I  |  |\r\n"
+            			+ "                        |  |__I___I___II___I___I__|  |\r\n"
+            			+ "                        | /___I_  I   II   I  _I___\\ |\r\n"
+            			+ "                        |'_     ~~~~~~~~~~~~~~     _`|\r\n"
+            			+ "                    __-~...~~~~~--------------~~~~~...~-__\r\n"
+            			+ "            ___---~~......................................~~---___\r\n"
+            			+ ".___..---~~~......................................................~~~---..___,\r\n"
+            			+ " `=.______________________________________________________________________,='\r\n"
+            			+ "    @^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@\r\n"
+            			+ "              |   |    | |    |  |    ||    |  |    | |    |   |\r\n"
+            			+ "              |   |____| |____|  |    ||    |  |____| |____|   |\r\n"
+            			+ "              |__________________|____||____|__________________|\r\n"
+            			+ "            _-|_____|_____|_____|__|------|__|_____|_____|_____|-_ ";
+                
+                String asciiName = "                  ___ _                              _       _ \r\n"
+                		+ "                 / _ \\ | __ _ ______ _    /\\  /\\___ | |_ ___| |\r\n"
+                		+ "                / /_)/ |/ _` |_  / _` |  / /_/ / _ \\| __/ _ \\ |\r\n"
+                		+ "               / ___/| | (_| |/ / (_| | / __  / (_) | ||  __/ |\r\n"
+                		+ "               \\/    |_|\\__,_/___\\__,_| \\/ /_/ \\___/ \\__\\___|_|\r\n"
+                		+ "                                                               \r\n"
+                		+ "\r";
+            	
             	while(stop==false){
             		
-    	            System.out.println("\n\n+---------------------- -! WELCOME TO STEPHANE PLAZA HOTEL !- ----------------------+\n\n  [A]  Etat de L'Hotel");
+            		System.out.println(asciiHotel);
+            		System.out.println(asciiName);
+            		
+    	            System.out.println("+---------------------- -! WELCOME TO STEPHANE PLAZA HOTEL !- ----------------------+\n\n  [A]  Etat de L'Hotel");
     	
     	            System.out.println("  [B]  Afficher le nombre de chambres chambres reservees");
     	
