@@ -7,7 +7,7 @@ import fr.afpa.beans.User;
 
 public class HotelManager {
 
-    public HotelManager(){
+    public HotelManager() throws InterruptedException{
     	
     	String tokenRole = login();
     	
@@ -329,7 +329,7 @@ public class HotelManager {
         }
     }
     
-    private void contact(Chambre[] hotel){
+    private void contact(Chambre[] hotel) throws InterruptedException{
     	
     	Scanner in = new Scanner(System.in);
     	
@@ -337,7 +337,14 @@ public class HotelManager {
     	
     	System.out.println("\n\n+---------------------- -! VOUS ETES ACTUELLEMENT EN CONTACT AVEC L'UN DE NOS HOTELIERS !- ----------------------+\n\n");
     	
-    	System.out.println("- Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?");
+    	String sentence = "- Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?";
+    	
+    	for (int i=0;i<sentence.length();i++) {
+		  System.out.print(sentence.charAt(i));
+		  Thread.sleep(25);
+		}
+    	
+    	System.out.println("\n");
     	
         System.out.println("  [A] - Je souhaiterais reserver une chambre.");
     	
@@ -351,7 +358,7 @@ public class HotelManager {
         
     }
     
-    private void menu(String tokenRole, Chambre[] hotel){
+    private void menu(String tokenRole, Chambre[] hotel) throws InterruptedException{
         
         boolean stop = false;
 
