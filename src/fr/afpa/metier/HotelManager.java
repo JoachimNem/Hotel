@@ -12,6 +12,8 @@ public class HotelManager {
     	String tokenRole = login();
     	
     	Chambre hotel[] = generateData();
+    	
+    	
               
         menu(tokenRole, hotel);
     }
@@ -257,6 +259,8 @@ public class HotelManager {
                         Hotel[total] = new Chambre(0,type,taille,vue,occupation,tarif,options);
 
                         nbChambres--; 
+                        
+                        System.out.println(Hotel[i]);
 
                         total++;
                     
@@ -400,7 +404,7 @@ public class HotelManager {
     	                	lastNotFull(hotel);
     	                    break;
     	                case "F":
-
+    	                	firstFreeCritere(hotel);
     	                	break;
     	                case "Q":
     	                    System.out.println("\nMerci d'avoir utilis\u00e9 l'application Stephane Plaza Hotel !");
@@ -467,6 +471,73 @@ public class HotelManager {
 	        
         in.close();
         
+    }    
+
+    private void firstFreeCritere(String tokenRole, Chambre[] hotel) {
+    	
+    	String choice = "";
+    	boolean stop = false;
+    	
+    	Scanner in = new Scanner(System.in);
+    	choice = in.next();
+    	
+    	while(stop== true) {
+    		
+    		System.out.println("Quel type de logement souhaiteriez-vous? ");  
+    		
+            System.out.println("  [A]  Chambre vue piscine (44 mètres carrés");
+            
+            System.out.println("  [B]  Chambre vue jardin (44 mètres carrés");
+            
+            System.out.println("  [C]  Chambre vue ocean (44 mètres carrés");
+            
+            System.out.println("  [D]  Chambre vue imprenable sur l'ocean (44 mètres carrés");
+            
+            System.out.println("  [E]  Suite CDA (82 mètres carrés");
+            
+            System.out.println("  [F]  Suite Executive (140 mètres carrés");
+            
+            System.out.println("  [G]  Suite Ambassadeur (230 mètres carrés");
+            
+            System.out.println("  [H]  Suite Royale (342 mètres carrés");
+                    
+            System.out.println("  [Q]  Retour");
+            
+            switch(choice.toUpperCase()) {
+            case "A":
+            	
+            	for (int i = 0; i<hotel.length; i++)
+            	{
+            		if (hotel[i].getType().contains("Chambre Vue Piscine") && (hotel[i].getReservations().length < 3)) 
+            		{
+            			
+            		}
+            	}
+            	break;
+            case "B":
+            	break;
+            case "C":
+            	break;
+            case "D":
+            	break;
+            case "E":
+            	break;
+            case "F":
+            	break;
+            case "G":
+            	break;
+            case "H":
+            	break;
+            case "Q":
+            	menu();
+            	break;
+            	
+            	
+            }
+    	}
+        
+    	System.out.println("Quel type de chambre souhaiteriez-vous? ");
+
+    	hotel[0].getOptions().toString();
     }
-    
 }

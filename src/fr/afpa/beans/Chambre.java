@@ -69,6 +69,10 @@ public class Chambre{
     public int getTotalChambres(){
         return totalChambres;
     }
+    
+    public Options getOptions() {
+    	return options;
+    }
 
     // SETTERS
 
