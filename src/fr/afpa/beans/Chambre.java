@@ -70,9 +70,17 @@ public class Chambre{
         return totalChambres;
     }
     
+
     public Options getOptions() {
     	return options;
-    }
+}
+    public int getAnEmptyReservation(Reservation[] reservation) {
+    	for(int i = 0;i<3;i++){
+    		if(reservation[i]==null) {
+    			return i;
+    		}
+    	}
+    	return 0;    }
 
     // SETTERS
 
@@ -106,14 +114,25 @@ public class Chambre{
         return tarif;
     }
     
-    public String setReservations(LocalDate arrivee, LocalDate depart, int nRes, String loginClient) {
+    public void setReservations(LocalDate arrivee, LocalDate depart, int nRes, String loginClient) {
+    	reservation[nRes] = null;
     	reservation[nRes] = new Reservation(arrivee, depart, loginClient);
-    	return "Votre r�servation : " + reservation[nRes].toString();
     }
 
     public int setTotalChambres(int totalChambres){
         Chambre.totalChambres=totalChambres;
         return totalChambres;
+    }
+    
+    // FREE ROOM
+    
+    public boolean AreReservationsFull(){
+        if(reservation[0] == null || reservation[1] == null || reservation[2] == null) {
+        	return true;
+        }
+        else {
+        	return false;
+        }
     }
 
     // TOSTRING
@@ -128,7 +147,7 @@ public class Chambre{
     	if( reservation == null) {
     		return true;
     	}
-    	else if((!LocalDate.now().isAfter(reservation.getDateA()) && ( !LocalDate.now().isBefore(reservation.getDateD()) || LocalDate.now().isEqual(reservation.getDateD()) ))){
+    	else if((!LocalDate.now().isAfter(reservation.getDateA()) && ( !LocalDate.now().isBefore(reservation.getDateD()) || !LocalDate.now().isEqual(reservation.getDateD()) ))){
     		return true;
     	}
     	else{
