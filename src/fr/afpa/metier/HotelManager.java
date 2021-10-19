@@ -1,4 +1,5 @@
 package fr.afpa.metier;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import fr.afpa.beans.Chambre;
@@ -9,16 +10,18 @@ public class HotelManager {
 
     public HotelManager() throws InterruptedException{
     	
-    	String tokenRole = login();
+    	User user = login();
     	
     	Chambre hotel[] = generateData();
               
-        menu(tokenRole, hotel);
+        menu(user, hotel);
     }
 
-    private String login(){
+    private User login(){
 
         User users[] = new User[2];
+        
+        // TABLEAU D'UTILISATEURS BRUT
 
         users[0] = new User("Alexandre","Leblond","Tyrenn","Password","user");
         users[1] = new User("adminNickname","adminName","admin","adminPassword","admin");
@@ -29,9 +32,11 @@ public class HotelManager {
 
         String password = "";
         
-        String tokenRole = "";
+        User user = new User();
 
         boolean connected = false;
+        
+        // CONNEXION
 
         while(!connected){
             System.out.println("Veuillez entrer votre identifiant de connexion :");
@@ -42,13 +47,13 @@ public class HotelManager {
                     password = in.next();
                     if(users[i].getPassword().equalsIgnoreCase(password) && users[i].getLogin().equalsIgnoreCase(login)){
                         connected = true;
-                        tokenRole = users[i].getRole();
+                        user = users[i];
                         break;
                     }
                 }
             }
         }
-        return tokenRole;
+        return user;
     }
 
     private Chambre[] generateData(){
@@ -270,6 +275,8 @@ public class HotelManager {
     
     private void showRooms(Chambre[] hotel){
     	
+    	// AFFICHAGE DES CHAMBRES
+    	
     	for(int i = 0; i < hotel.length;i++) {
     		if( hotel[i].isFree()  ){
     			System.out.println("               +-----------------------------------------------+");
@@ -288,6 +295,8 @@ public class HotelManager {
     	
     	int fullRooms = 0;
     	
+    	// AFFICHAGE DES CHAMBRES QUI N'ONT PLUS DE DISPONIBILITES
+    	
         for(int i = 0; i< hotel.length; i++){
             if(!hotel[i].isFree()){
                 fullRooms++;
@@ -301,6 +310,8 @@ public class HotelManager {
     	
     	int notFullRooms = 0;
     	
+    	// AFFICHAGE DES CHAMBRES QUI ONT TOUJOURS AU MOINS UNE DISPONIBILITE
+    	
         for(int i = 0; i< hotel.length; i++){
             if(hotel[i].isFree()){
                 notFullRooms++;
@@ -310,6 +321,9 @@ public class HotelManager {
     }
     
     private void firstNotFull(Chambre[] hotel) {
+    	
+    	// AFFICHAGE DE LA PREMIERE CHAMBRE AVEC DES DISPONIBILITES AUJOURD'HUI
+    	
         for(int i = 0; i< hotel.length; i++){
             if(hotel[i].isFree()){
                 System.out.println("La premiere chambre libre est la chambre numero " + hotel[i].getId());
@@ -320,6 +334,9 @@ public class HotelManager {
     }
     
     private void lastNotFull(Chambre[] hotel) {
+    	
+    	// AFFICHAGE DE LA DERNIERE CHAMBRE AVEC DES DISPONIBILITES AUJOURD'HUI
+    	
         for(int i = hotel.length-1 ; i > 0; i--){
             if(hotel[i].isFree()){
                 System.out.println("La premiere chambre libre depuis la fin est la chambre numero " + hotel[i].getId());
@@ -329,7 +346,7 @@ public class HotelManager {
         }
     }
     
-    private void contact(Chambre[] hotel) throws InterruptedException{
+    private void contact(User user,Chambre[] hotel) throws InterruptedException{
     	
     	Scanner in = new Scanner(System.in);
     	
@@ -337,7 +354,9 @@ public class HotelManager {
     	
     	System.out.println("\n\n+---------------------- -! VOUS ETES ACTUELLEMENT EN CONTACT AVEC L'UN DE NOS HOTELIERS !- ----------------------+\n\n");
     	
-    	String sentence = "- Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?";
+    	String sentence = "Employé :  Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?";
+    	
+    	String dialogue = sentence;
     	
     	for (int i=0;i<sentence.length();i++) {
 		  System.out.print(sentence.charAt(i));
@@ -354,17 +373,217 @@ public class HotelManager {
         
         choix = in.next();
         
+        switch(choix) {
+        	case "A":
+        		
+        		// PATH A - RESERVER UNE CHAMBRE
+        		
+        		// INITIALISATION DE LA PHRASE ET ENREGISTREMENT DU DIALOGUE
+        		
+        		sentence = "Vous : Je souhaiterais reserver une chambre.";
+        		
+        		dialogue = dialogue + ";" + sentence;
+		
+        		System.out.println(" ");
+        		
+        		// AFFICHAGE DU TEXTE CARACTERE PAR CARACTERE ET REAFFICHAGE DE L'HISTORIQUE DE DISCUSSION, CLEAR DE CONSOLE VIA 50 PRINTLN()
+        		
+            	for (int i=0;i<sentence.length();i++) {
+          		  System.out.print(sentence.charAt(i));
+          		  Thread.sleep(25);
+          		}
+            	
+            	for(int space = 0;space<50;space++) {
+            		System.out.println("");
+            	}
+            	
+            	for(int j = 0;j<dialogue.length();j++) {
+            		if(dialogue.charAt(j)!=';') {
+            			System.out.print(dialogue.charAt(j));
+            		}
+            		else {
+            			System.out.println(" ");
+            			System.out.println(" ");
+            		}
+            	}
+            	
+            	boolean reservationTerminee = false;
+            	
+            	while(!reservationTerminee) {
+            		
+                	sentence = "Employé :  Quelle chambre vous ferait plaisir ?";
+                	
+                	dialogue = dialogue + ";" + sentence;
+                	
+                	System.out.println(" ");
+                	
+                	for (int i=0;i<sentence.length();i++) {
+                		  System.out.print(sentence.charAt(i));
+                		  Thread.sleep(25);
+                		}
+                	
+                	for(int space = 0;space<50;space++) {
+                		System.out.println("");
+                	}
+                	
+                	for(int j = 0;j<dialogue.length();j++) {
+                		if(dialogue.charAt(j)!=';') {
+                			System.out.print(dialogue.charAt(j));
+                		}
+                		else {
+                			System.out.println(" ");
+                			System.out.println(" ");
+                		}
+                	}
+                	
+                	System.out.println(" ");
+                	
+                    System.out.println("\n  [A] - Je pense que la Chambre Vue Piscine serait un choix eau poil !");
+                    
+                    System.out.println("\n  [B] - La Chambre Vue Jardin me remplit de pensées positives.");
+                    
+                    System.out.println("\n  [C] - Jetons nous à l'eau ! Je choisis la Chambre Vue Océan.");
+                    
+                    System.out.println("\n  [D] - La vue est peut-être imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'océan.");
+                          	
+                    System.out.println("\n  [E] - J'aimerais une suite à mon niveau, la suite CDA est-elle disponible ?");
+                    
+                    System.out.println("\n  [F] - J'étais bourreau dans mes jeunes années, partons pour la Suite Executive ?");
+                    
+                    System.out.println("\n  [G] - Je suis un grand fan du che guevara, je choisis la Suite Ambassadeur");
+                    
+                    System.out.println("\n  [H] - La vue est peut-être imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'océan.");      
+
+                    System.out.println("\n  [I] - Aucune idée, pourriez vous me conseiller ?");
+                	
+                    choix = in.next();
+                    
+                    switch(choix) {
+                    	case "A":
+                    		
+                    		// PATH A-A CHOIX DE CHAMBRE VUE PISCINE
+                    		
+                    		sentence = "Vous :  Je pense que la Chambre Vue Piscine serait un choix eau poil !";
+                    		
+                        	dialogue = dialogue + ";" + sentence;
+                        	
+                        	System.out.println(" ");
+                        	
+                        	for (int i=0;i<sentence.length();i++) {
+                        		  System.out.print(sentence.charAt(i));
+                        		  Thread.sleep(25);
+                        		}
+                        	
+                        	for(int space = 0;space<50;space++) {
+                        		System.out.println("");
+                        	}
+                        	
+                        	for(int j = 0;j<dialogue.length();j++) {
+                        		if(dialogue.charAt(j)!=';') {
+                        			System.out.print(dialogue.charAt(j));
+                        		}
+                        		else {
+                        			System.out.println(" ");
+                        			System.out.println(" ");
+                        		}
+                        	}
+                        	
+                        	for(int k=0;k<hotel.length;k++) {
+                        		
+                        		if(hotel[k].getType().equals("Chambre Vue Piscine")) {
+                        			
+                            		if(hotel[k].AreReservationsFull()){
+                            			
+                                    	sentence = "Employé : Tres bien ! Quand souhaitez vous reserver cette chambre ?";
+                                    	
+                                    	dialogue = dialogue + ";" + sentence;
+                                    	
+                                    	System.out.println(" ");
+                                    	
+                                    	for (int i=0;i<sentence.length();i++) {
+                                    		  System.out.print(sentence.charAt(i));
+                                    		  Thread.sleep(25);
+                                    		}
+                                    	
+                                    	for(int space = 0;space<50;space++) {
+                                    		System.out.println("");
+                                    	}
+                                    	
+                                    	for(int j = 0;j<dialogue.length();j++) {
+                                    		if(dialogue.charAt(j)!=';') {
+                                    			System.out.print(dialogue.charAt(j));
+                                    		}
+                                    		else {
+                                    			System.out.println(" ");
+                                    			System.out.println(" ");
+                                    		}
+                                    	}
+                                    	
+                                    	System.out.println(" ");
+                                    	
+                                    	// PATH A
+                                    	
+                                        System.out.println("\nQuand souhaitez vous reserver votre chambre ? ( Entrez la date d'arrivee et de depart sous ce format : yyyy-mm-dd )");
+                                    	
+                                        System.out.println("Date d'arrivée :");
+                                        
+                                        choix = in.next();
+                                    	
+                                        LocalDate dateA = LocalDate.parse(choix);
+                                        
+                                        System.out.println("Date de départ :");
+                                        
+                                        choix = in.next();
+                                    	
+                                        LocalDate dateD = LocalDate.parse(choix);
+                                        
+                                        System.out.println("\nTout est bon pour moi ! Puis-je vous demander votre numero de carte de credit ?");
+                                        
+                                        choix = in.next();
+                                        
+                                        System.out.println("\nMerci Beaucoup ! Votre réservation a bien ete prise en compte, un mail contant votre reservation vous sera adressé dans les plus brefs delais. A bientot chez Plaza Hotel ! ( Vous allez etre rediriges vers le menu dans quelques instants. )");
+                                        
+                                        int reservationVide = hotel[k].getAnEmptyReservation(hotel[k].getReservations());
+                                        
+                                        hotel[k].setReservations(dateA, dateD, reservationVide, user.getLogin());
+                                        
+                                        System.out.println(hotel[k].getReservations()[reservationVide].toString());
+                                        
+                                        Thread.sleep(5000);
+                                        
+                                        k=hotel.length;
+                                        
+                                        reservationTerminee = true;
+                            		}
+                            		else {
+                            			
+                            		}
+                        			
+                        		}
+                    			
+                        	}
+                        	
+                    		break;
+                    }
+            		
+            	}
+                
+        		break;
+        }
+        
+    	
+        
         System.out.println(choix);
         
     }
     
-    private void menu(String tokenRole, Chambre[] hotel) throws InterruptedException{
+    private void menu(User user, Chambre[] hotel) throws InterruptedException{
     	
     	boolean stop = false;
 
         Scanner in = new Scanner(System.in);
             
-            if(tokenRole.equals("admin")){
+            if(user.getLogin().equals("admin")){
             	
             	while(!stop){
             		
@@ -494,7 +713,7 @@ public class HotelManager {
     	                	lastNotFull(hotel);
     	                    break;
     	                case "F":{
-    	                	contact(hotel);
+    	                	contact(user, hotel);
     	                	break;
     	                }
     	                case "Q":
