@@ -147,18 +147,17 @@ public class Options{
     }
 
     public String toString(){
-        return "\nFer et planche à repasser sur demande : " + fer + "\n\n" +
-        "Téléphone :                            " + tel + "\n\n" +
-        "Télévision par câble :                " + television + "\n\n" +
-        "Climatisation :                          " + clim + "\n\n" +
-        "Bouilloire électrique :                 " + bouilloire + "\n\n" +
-        "Concierge 24h/24 :                       " + concierge + "\n\n" +
-        "Accès Internet haut débit sans fil :   " + internet + "\n\n" +
-        "Lecteur DVD sur demande :                " + dvd + "\n\n" +
-        "Service aux chambres 24h/24 :            " + services + "\n\n" +
-        "Minibar :                                " + minibar + "\n\n" +
-        "Sèche-cheveux :                         " + sechecheveux + "\n\n" +
-        "Coffre-fort dans la chambre :            " + coffre + "\n\n" ;
+        return "\n Fer et planche à repasser sur demande : " + fer + "\n\n" +
+        " Téléphone :                            " + tel + "\n\n" +
+        " Télévision par câble :                " + television + "\n\n" +
+        " Climatisation :                          " + clim + "\n\n" +
+        " Bouilloire électrique :                 " + bouilloire + "\n\n" +
+        " Concierge 24h/24 :                       " + concierge + "\n\n" +
+        " Accès Internet haut débit sans fil :   " + internet + "\n\n" +
+        " Lecteur DVD sur demande :                " + dvd + "\n\n" +
+        " Service aux chambres 24h/24 :            " + services + "\n\n" +
+        " Minibar :                                " + minibar + "\n\n" +
+        " Sèche-cheveux :                         " + sechecheveux + "\n\n" +
+        " Coffre-fort dans la chambre :            " + coffre + "\n\n" ;
     }
-
 }

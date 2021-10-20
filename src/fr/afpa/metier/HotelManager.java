@@ -17,6 +17,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import fr.afpa.beans.Chambre;
 import fr.afpa.beans.Options;
+import fr.afpa.beans.Reservation;
 import fr.afpa.beans.User;
 
 public class HotelManager {
@@ -26,6 +27,8 @@ public class HotelManager {
     	User user = login();
     	
     	Chambre hotel[] = generateData();
+    	
+    	
               
         menu(user, hotel);
     }
@@ -275,6 +278,8 @@ public class HotelManager {
                         Hotel[total] = new Chambre(0,type,taille,vue,occupation,tarif,options);
 
                         nbChambres--; 
+                        
+                        System.out.println(Hotel[i]);
 
                         total++;
                     
@@ -367,7 +372,7 @@ public class HotelManager {
     	
     	System.out.println("\n\n+---------------------- -! VOUS ETES ACTUELLEMENT EN CONTACT AVEC L'UN DE NOS HOTELIERS !- ----------------------+\n\n");
     	
-    	String sentence = "Employ� :  Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?";
+    	String sentence = "Employ� :  Bonjour ! Que pouvons nous faire pour vous aujourd'hui ?";
     	
     	String dialogue = sentence;
     	
@@ -429,7 +434,7 @@ public class HotelManager {
             	
             	while(!reservationTerminee) {
             		
-                	sentence = "Employ� :  Quelle chambre vous ferait plaisir ?";
+                	sentence = "Employ� :  Quelle chambre vous ferait plaisir ?";
                 	
                 	dialogue = dialogue + ";" + sentence;
                 	
@@ -458,27 +463,30 @@ public class HotelManager {
                 	
                     System.out.println("\n  [A] - Je pense que la Chambre Vue Piscine serait un choix eau poil !");
                     
-                    System.out.println("\n  [B] - La Chambre Vue Jardin me remplit de pens�es positives.");
+                    System.out.println("\n  [B] - La Chambre Vue Jardin me remplit de pens�es positives.");
                     
-                    System.out.println("\n  [C] - Jetons nous � l'eau ! Je choisis la Chambre Vue Oc�an.");
+                    System.out.println("\n  [C] - Jetons nous � l'eau ! Je choisis la Chambre Vue Oc�an.");
                     
-                    System.out.println("\n  [D] - La vue est peut-�tre imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'oc�an.");
+                    System.out.println("\n  [D] - La vue est peut-�tre imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'oc�an.");
                           	
-                    System.out.println("\n  [E] - J'aimerais une suite � mon niveau, la suite CDA est-elle disponible ?");
+                    System.out.println("\n  [E] - J'aimerais une suite � mon niveau, la suite CDA est-elle disponible ?");
                     
-                    System.out.println("\n  [F] - J'�tais bourreau dans mes jeunes ann�es, partons pour la Suite Executive ?");
+                    System.out.println("\n  [F] - J'�tais bourreau dans mes jeunes ann�es, partons pour la Suite Executive ?");
                     
                     System.out.println("\n  [G] - Je suis un grand fan du che guevara, je choisis la Suite Ambassadeur");
                     
                     System.out.println("\n  [H] - Je me sens comme un roi aujourd'hui, je veux la Suite Royale.");      
 
-                    System.out.println("\n  [I] - Aucune id�e, pourriez vous me conseiller ?");
+                    System.out.println("\n  [H] - La vue est peut-etre imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'oc�an.");      
+
+                    System.out.println("\n  [I] - Aucune idee, pourriez vous me conseiller ?");
                 	
                     choix = in.next();
                     
                     String typeChambre= "";
                     
                     switch(choix) {
+                    
                     case "A":
                     	sentence = "Vous : Je pense que la Chambre Vue Piscine serait un choix eau poil !";
                     	typeChambre= "Chambre Vue Piscine";
@@ -600,7 +608,7 @@ public class HotelManager {
     	                	lastNotFull(hotel);
     	                    break;
     	                case "F":
-
+    	                	menuReservation(hotel, user);
     	                	break;
     	                case "Q":
     	                    System.out.println("\nMerci d'avoir utilis\u00e9 l'application Stephane Plaza Hotel !");
@@ -703,6 +711,89 @@ public class HotelManager {
 	        
         in.close();
         
+    }    
+
+    private void menuReservation(Chambre[] hotel, User user) {
+    	
+    	String choice = "";
+    	boolean stop = true;
+    	String typeChambre = "";
+    	
+    	Scanner in = new Scanner(System.in);
+    	
+    	
+    	while(stop == true) {
+    		
+    		System.out.println("Quel type de logement souhaiteriez-vous? \n ");  
+    		
+            System.out.println("  [A]  Chambre vue piscine (44 mètres carrés)");
+            
+            System.out.println("  [B]  Chambre vue jardin (44 mètres carrés)");
+            
+            System.out.println("  [C]  Chambre vue ocean (44 mètres carrés)");
+            
+            System.out.println("  [D]  Chambre vue imprenable sur l'ocean (44 mètres carrés)");
+            
+            System.out.println("  [E]  Suite CDA (82 mètres carrés)");
+            
+            System.out.println("  [F]  Suite Executive (140 mètres carrés)");
+            
+            System.out.println("  [G]  Suite Ambassadeur (230 mètres carrés)");
+            
+            System.out.println("  [H]  Suite Royale (342 mètres carrés)");
+                    
+            System.out.println("  [Q]  Retour");
+            
+            choice = in.next();
+            
+            switch(choice.toUpperCase()) {
+            case "A":
+            	typeChambre = "Chambre Vue Piscine";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "B":
+            	typeChambre = "Chambre Vue Jardin";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "C":
+            	typeChambre = "Chambre Vue Océan";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "D":
+            	typeChambre = "Chambre vue imprenable sur l'océan";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "E":
+            	typeChambre = "Suite CDA";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "F":
+            	typeChambre = "Suite Executive";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "G":
+            	typeChambre = "Suite Ambassadeur";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "H":
+            	typeChambre = "Suite Royale";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
+            	break;
+            case "Q":
+            	stop = false;
+            	break;
+            	
+            	
+            }
+    	}
     }
 
     private boolean customerBookingRoom(String choix, User user, Chambre[] hotel, String typeChambre, String sentence, String dialogue) throws InterruptedException {
@@ -1014,6 +1105,91 @@ public class HotelManager {
 		System.out.println("PDF g�n�r�");
     	
     }
+    
+    private void reserverChambre(Chambre[] hotel, User user, String typeChambre) {
+    	
+    	Scanner in = new Scanner(System.in);
+    	
+    	
+    	
+    	for (int i = 0; i<hotel.length; i++)
+    	{
+    		int numeroChambre  = hotel[i].getId()+1;
+    		
+    		if (hotel[i].getType().contains(typeChambre) && hotel[i].AreReservationsFull()) 
+    		{
+    			System.out.println(" La chambre numéro " + numeroChambre + " est disponible. \n");
+
+    			System.out.println(" Voici les détails de celle-ci :\n");
+    			
+    			System.out.println(hotel[i].toString());
+    			
+    			System.out.println(" Souhaitez vous la réserver ?");
+    			
+    			System.out.println("  [A] Oui");
+    			
+    			System.out.println("  [B] Non");
+    			
+    	    	String choiceReserv = "";
+    			
+    			choiceReserv = in.next();
+    			
+    			
+    			if (choiceReserv.toUpperCase().equals("A")) {
+    				
+    		    	LocalDate localDateA;
+    		    	LocalDate localDateD;
+    		    	String dateA;
+    		    	String dateD;
+    				
+    				System.out.println(" Merci d'indiquer votre date d'arrivée (AAAA-MM-DD) : ");
+    				dateA = in.next();
+    				localDateA = LocalDate.parse(dateA);
+    				
+    				System.out.println(" Merci d'indiquer votre date de départ (AAAA-MM-DD) : ");
+    				dateD = in.next();
+    				localDateD = LocalDate.parse(dateD);
+    				
+    				if (hotel[i].isFree(localDateA,localDateD)) {
+
+    					System.out.println(" Veuillez entrer votre code de carte bancaire :");
+    					
+    					int codeCB = in.nextInt();
+    					
+    			    	int indiceReserv = -1;
+    					
+    					indiceReserv = hotel[i].getAnEmptyReservation(hotel[i].getReservations());
+    					
+    					Reservation[] tabReserv = new Reservation[3]; 
+    					
+    					tabReserv = hotel[i].getReservations();
+    					
+    					tabReserv[indiceReserv] = new Reservation(localDateA, localDateD, user.getLogin());
+    					
+    					System.out.println("\n Votre réservation a bien été prise en compte! \n\n"); 
+    					    					
+    					i = hotel.length;
+    							
+    				}
+    				
+    				else {
+    					
+    					System.out.println(" Une réservation est déja enregistrée pendant cette période ou vos dates ne sont pas correctes \n");
+    					// relance la fonction de réservation
+    					
+    					i = hotel.length;
+    					
+    				} 
+    			}
+    			
+    			else {
+    				
+    				break;
+    			}			
+    		}
+    		
+    	}
+	}
 }
     
 
