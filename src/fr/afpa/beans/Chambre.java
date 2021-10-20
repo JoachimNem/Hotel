@@ -140,11 +140,11 @@ public class Chambre{
     
     // TESTS DE VERIFICATION DE CHAMBRES
     
-    public boolean areWeOut(Reservation reservation){
-    	if( reservation == null) {
+    public boolean areWeOut(Reservation reservation, LocalDate dateA, LocalDate dateD){
+    	if(reservation == null) {
     		return true;
     	}
-    	else if((!LocalDate.now().isAfter(reservation.getDateA()) && ( !LocalDate.now().isBefore(reservation.getDateD()) || !LocalDate.now().isEqual(reservation.getDateD()) ))){
+    	else if((!dateA.isAfter(reservation.getDateA()) && !dateA.isEqual(reservation.getDateA()) && !dateD.isBefore(reservation.getDateD()) )){
     		return true;
     	}
     	else{
@@ -152,8 +152,8 @@ public class Chambre{
     	}
     }
     
-    public boolean isFree(){
-    	if(areWeOut(reservation[0]) || areWeOut(reservation[1]) || areWeOut(reservation[2])){
+    public boolean isFree(LocalDate dateA, LocalDate dateD){
+    	if(areWeOut(reservation[0], dateA, dateD) && areWeOut(reservation[1], dateA, dateD) && areWeOut(reservation[2], dateA, dateD)){
     		return true;
     	}
     	else{

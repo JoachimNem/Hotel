@@ -7,12 +7,13 @@ public class User{
     private String role;
     private String login;
     private String password;
+    private String email;
 
     public User(){
 
     }
 
-    public User(String nom, String prenom, String login, String password, String role){
+    public User(String nom, String prenom, String login, String password, String role, String email){
         this.nom=nom;
         this.prenom=prenom;
         this.role=role;
@@ -40,6 +41,10 @@ public class User{
 
     public String getPassword(){
         return password;
+    }
+    
+    public String getEmail(){
+        return email;
     }
 
     // SETTERS
