@@ -123,7 +123,7 @@ public class Chambre{
     
     // FREE ROOM
     
-    public boolean AreReservationsFull(){
+    public boolean AreReservationsNotFull(){
         if(reservation[0] == null || reservation[1] == null || reservation[2] == null) {
         	return true;
         }
@@ -135,7 +135,7 @@ public class Chambre{
     // TOSTRING
     
     public String toString(){
-        return id + "\n" + type + "\n" + taille + "\n" + vue + "\n" + occupation + "\n" + tarif + " euros\n" + options + "\n";
+        return " Id : "+ id + "\n Type : " + type + "\n Taille :" + taille + "\n Vue : " + vue + "\n Nombre de personnes maximum : " + occupation + "\n Tarif : " + tarif + " euros\n Options : " + options + "\n";
     }
     
     // TESTS DE VERIFICATION DE CHAMBRES

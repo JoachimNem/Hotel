@@ -494,31 +494,31 @@ public class HotelManager {
                     	reservationTerminee = true;
                     	break;
                     case "B":
-                    	sentence = "Vous : La Chambre Vue Jardin me remplit de pensées positives.";
+                    	sentence = "Vous : La Chambre Vue Jardin me remplit de pensï¿½es positives.";
                     	typeChambre= "Chambre Vue Jardin";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
                     	break;
                     case "C":
-                    	sentence = "Vous : Jetons nous à l'eau ! Je choisis la Chambre Vue Océan.";
+                    	sentence = "Vous : Jetons nous ï¿½ l'eau ! Je choisis la Chambre Vue Ocï¿½an.";
                     	typeChambre= "Chambre Vue OcÃ©an";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
                     	break;
                     case "D":
-                    	sentence = "Vous : La vue est peut-être imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'océan.";
+                    	sentence = "Vous : La vue est peut-ï¿½tre imprenable mais pas la chambre, je choisis la Chambre vue imprenable sur l'ocï¿½an.";
                     	typeChambre= "Chambre vue imprenable sur l'ocÃ©an";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
                     	break;
                     case "E":
-                    	sentence = "Vous : J'aimerais une suite à mon niveau, la suite CDA est-elle disponible ?";
+                    	sentence = "Vous : J'aimerais une suite ï¿½ mon niveau, la suite CDA est-elle disponible ?";
                     	typeChambre= "Suite CDA";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
                     	break;
                     case "F":
-                    	sentence = "Vous : J'étais bourreau dans mes jeunes années, partons pour la Suite Executive ?";
+                    	sentence = "Vous : J'ï¿½tais bourreau dans mes jeunes annï¿½es, partons pour la Suite Executive ?";
                     	typeChambre= "Suite Executive";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
@@ -536,7 +536,7 @@ public class HotelManager {
                     	reservationTerminee = true;
                     	break;
                     case "I":
-                    	sentence = "Vous : Aucune idée, pourriez vous me conseiller ?";
+                    	sentence = "Vous : Aucune idï¿½e, pourriez vous me conseiller ?";
                     	typeChambre= "Aucun";
                     	customerBookingRoom(choix, user, hotel, typeChambre, sentence, dialogue);
                     	reservationTerminee = true;
@@ -827,9 +827,9 @@ public class HotelManager {
         		
         		if(hotel[k].getType().equals(typeChambre)) {
         			
-            		if(hotel[k].AreReservationsFull()){
+            		if(hotel[k].AreReservationsNotFull()){
             			
-                    	sentence = "Employé : Tres bien ! Quand souhaitez vous reserver cette chambre ?";
+                    	sentence = "Employï¿½ : Tres bien ! Quand souhaitez vous reserver cette chambre ?";
                     	
                     	dialogue = dialogue + ";" + sentence;
                     	
@@ -858,19 +858,19 @@ public class HotelManager {
                     	
                     	// PATH A
                     	
-                        System.out.println("\n\"Employé : Quand souhaitez vous reserver votre chambre ? ( Entrez la date d'arrivee et de depart sous ce format : yyyy-mm-dd )");
+                        System.out.println("\n\"Employï¿½ : Quand souhaitez vous reserver votre chambre ? ( Entrez la date d'arrivee et de depart sous ce format : yyyy-mm-dd )");
                         
                         boolean areDateCorrect = false;
                         
                         while(!areDateCorrect) {
                         
-                            System.out.println("Date d'arrivée :");
+                            System.out.println("Date d'arrivï¿½e :");
                             
                             choix = in.next();
                         	
                             LocalDate dateA = LocalDate.parse(choix);
                             
-                            System.out.println("Date de départ :");
+                            System.out.println("Date de dï¿½part :");
                             
                             choix = in.next();
                         	
@@ -880,11 +880,11 @@ public class HotelManager {
                             	
                                 if(hotel[k].isFree(dateA, dateD)) {
                                 	
-                                    System.out.println("\n\"Employé : Tout est bon pour moi ! Puis-je vous demander votre numero de carte de credit ?");
+                                    System.out.println("\n\"Employï¿½ : Tout est bon pour moi ! Puis-je vous demander votre numero de carte de credit ?");
                                     
                                     choix = in.next();
                                     
-                                    System.out.println("\n\"Employé : Merci Beaucoup ! Votre réservation a bien ete prise en compte, un mail contant votre reservation vous sera adressé dans les plus brefs delais. A bientot chez Plaza Hotel ! ( Vous allez etre rediriges vers le menu dans quelques instants. )");
+                                    System.out.println("\n\"Employï¿½ : Merci Beaucoup ! Votre rï¿½servation a bien ete prise en compte, un mail contant votre reservation vous sera adressï¿½ dans les plus brefs delais. A bientot chez Plaza Hotel ! ( Vous allez etre rediriges vers le menu dans quelques instants. )");
                                     
                                     printBill(user, hotel[k]);
                                     
@@ -909,7 +909,7 @@ public class HotelManager {
                                 	k++;
                                 }
                                 else{
-                                	System.out.println("\n\"Employé : Malheureusement ce créneau est indisponible pour ce type de chambre, veuillez entrer un autre interval ou changez de type de séjour !");
+                                	System.out.println("\n\"Employï¿½ : Malheureusement ce crï¿½neau est indisponible pour ce type de chambre, veuillez entrer un autre interval ou changez de type de sï¿½jour !");
                                 	return false;
                                 }
                             	
@@ -952,7 +952,7 @@ public class HotelManager {
     		}
     	}
     	
-    	sentence = "Employé : Tres bien ! Quand souhaitez vous reserver cette chambre ?";
+    	sentence = "Employï¿½ : Tres bien ! Quand souhaitez vous reserver cette chambre ?";
     	
     }
     
@@ -965,13 +965,13 @@ public class HotelManager {
 			
 			PdfWriter.getInstance(document,new FileOutputStream("C:/Users/alexa/eclipse-workspace/Hotel/Facture.pdf"));
 			
-			// Ouverture du générateur de document ( Similaire à l'ouverture du Scanner )
+			// Ouverture du gï¿½nï¿½rateur de document ( Similaire ï¿½ l'ouverture du Scanner )
 			
 			document.open();
 			
 			String imgSrc = "C:\\Users\\alexa\\eclipse-workspace\\Hotel\\Plaza_Hotel_Logo_Mini.png";
 			
-			// Création d'une instance d'image via la methode getInstance
+			// Crï¿½ation d'une instance d'image via la methode getInstance
 					
 			Image image = Image.getInstance(imgSrc);
 			
@@ -979,7 +979,7 @@ public class HotelManager {
 			
 			Paragraph titre = new Paragraph(new Chunk("Plaza Hotel", FontFactory.getFont(FontFactory.COURIER, 20)));
 			
-	        PdfPTable tableHeader = new PdfPTable(2); // <-- 3 ici équivaut au NOMBRE DE COLONNES
+	        PdfPTable tableHeader = new PdfPTable(2); // <-- 3 ici ï¿½quivaut au NOMBRE DE COLONNES
 	        
 	        PdfPCell imgCell = new PdfPCell(image);
 	        
@@ -997,7 +997,7 @@ public class HotelManager {
 			Paragraph usersData = new Paragraph(
 					
 					new Chunk(
-					"\nDonnées Client : " +
+					"\nDonnï¿½es Client : " +
 					"\n" +
 					"\nNom : " +
 					user.getNom() +
@@ -1100,9 +1100,9 @@ public class HotelManager {
 			
 		}
 		
-		// Message de fin de génération du PDF 
+		// Message de fin de gï¿½nï¿½ration du PDF 
 		
-		System.out.println("PDF généré");
+		System.out.println("PDF gï¿½nï¿½rï¿½");
     	
     }
     
@@ -1116,7 +1116,7 @@ public class HotelManager {
     	{
     		int numeroChambre  = hotel[i].getId()+1;
     		
-    		if (hotel[i].getType().contains(typeChambre) && hotel[i].AreReservationsFull()) 
+    		if (hotel[i].getType().contains(typeChambre) && hotel[i].AreReservationsNotFull()) 
     		{
     			System.out.println(" La chambre numÃ©ro " + numeroChambre + " est disponible. \n");
 
@@ -1174,10 +1174,10 @@ public class HotelManager {
     				
     				else {
     					
-    					System.out.println(" Une rÃ©servation est dÃ©ja enregistrÃ©e pendant cette pÃ©riode ou vos dates ne sont pas correctes \n");
+    					System.out.println(" Une rÃ©servation est dÃ©ja enregistrÃ©e pendant cette pÃ©riode pour cette chambre \n\n Laissez nous vous proposer une autre chambre similaire \n");
     					// relance la fonction de rÃ©servation
     					
-    					i = hotel.length;
+    					
     					
     				} 
     			}

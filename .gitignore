@@ -36,5 +36,7 @@ bin/
 .classpath
 .project
 
+# Fichier .jar
+Libraries
 
 # End of https://www.toptal.com/developers/gitignore/api/java
