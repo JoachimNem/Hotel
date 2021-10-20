@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.afpa.beans.Chambre;
 import fr.afpa.beans.Options;
+import fr.afpa.beans.Reservation;
 import fr.afpa.beans.User;
 
 public class HotelManager {
@@ -630,7 +631,7 @@ public class HotelManager {
     	                	lastNotFull(hotel);
     	                    break;
     	                case "F":
-    	                	firstFreeCritere(hotel);
+    	                	menuReservation(hotel, user);
     	                	break;
     	                case "Q":
     	                    System.out.println("\nMerci d'avoir utilis\u00e9 l'application Stephane Plaza Hotel !");
@@ -735,70 +736,171 @@ public class HotelManager {
         
     }    
 
-    private void firstFreeCritere(Chambre[] hotel) {
+    private void menuReservation(Chambre[] hotel, User user) {
     	
     	String choice = "";
-    	boolean stop = false;
+    	boolean stop = true;
+    	String typeChambre = "";
     	
     	Scanner in = new Scanner(System.in);
-    	choice = in.next();
     	
-    	while(stop== true) {
+    	
+    	while(stop == true) {
     		
-    		System.out.println("Quel type de logement souhaiteriez-vous? ");  
+    		System.out.println("Quel type de logement souhaiteriez-vous? \n ");  
     		
-            System.out.println("  [A]  Chambre vue piscine (44 mètres carrés");
+            System.out.println("  [A]  Chambre vue piscine (44 mètres carrés)");
             
-            System.out.println("  [B]  Chambre vue jardin (44 mètres carrés");
+            System.out.println("  [B]  Chambre vue jardin (44 mètres carrés)");
             
-            System.out.println("  [C]  Chambre vue ocean (44 mètres carrés");
+            System.out.println("  [C]  Chambre vue ocean (44 mètres carrés)");
             
-            System.out.println("  [D]  Chambre vue imprenable sur l'ocean (44 mètres carrés");
+            System.out.println("  [D]  Chambre vue imprenable sur l'ocean (44 mètres carrés)");
             
-            System.out.println("  [E]  Suite CDA (82 mètres carrés");
+            System.out.println("  [E]  Suite CDA (82 mètres carrés)");
             
-            System.out.println("  [F]  Suite Executive (140 mètres carrés");
+            System.out.println("  [F]  Suite Executive (140 mètres carrés)");
             
-            System.out.println("  [G]  Suite Ambassadeur (230 mètres carrés");
+            System.out.println("  [G]  Suite Ambassadeur (230 mètres carrés)");
             
-            System.out.println("  [H]  Suite Royale (342 mètres carrés");
+            System.out.println("  [H]  Suite Royale (342 mètres carrés)");
                     
             System.out.println("  [Q]  Retour");
             
+            choice = in.next();
+            
             switch(choice.toUpperCase()) {
             case "A":
-            	
-            	for (int i = 0; i<hotel.length; i++)
-            	{
-            		if (hotel[i].getType().contains("Chambre Vue Piscine") && (hotel[i].getReservations().length < 3)) 
-            		{
-            			
-            		}
-            	}
+            	typeChambre = "Chambre Vue Piscine";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "B":
+            	typeChambre = "Chambre Vue Jardin";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "C":
+            	typeChambre = "Chambre Vue Océan";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "D":
+            	typeChambre = "Chambre vue imprenable sur l'océan";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "E":
+            	typeChambre = "Suite CDA";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "F":
+            	typeChambre = "Suite Executive";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "G":
+            	typeChambre = "Suite Ambassadeur";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "H":
+            	typeChambre = "Suite Royale";
+            	reserverChambre(hotel,user,typeChambre);
+            	stop=false;
             	break;
             case "Q":
+            	stop = false;
             	break;
             	
             	
             }
     	}
-        
-    	System.out.println("Quel type de chambre souhaiteriez-vous? ");
-
-    	hotel[0].getOptions().toString();
     }
+    private void reserverChambre(Chambre[] hotel, User user, String typeChambre) {
+    	
+    	Scanner in = new Scanner(System.in);
+    	
+    	
+    	
+    	for (int i = 0; i<hotel.length; i++)
+    	{
+    		int numeroChambre  = hotel[i].getId()+1;
+    		
+    		if (hotel[i].getType().contains(typeChambre) && hotel[i].isFree()) 
+    		{
+    			System.out.println(" La chambre numéro " + numeroChambre + " est disponible. \n");
+
+    			System.out.println(" Voici les détails de celle-ci :\n");
+    			
+    			System.out.println(hotel[i].toString());
+    			
+    			System.out.println(" Souhaitez vous la réserver ?");
+    			
+    			System.out.println("  [A] Oui");
+    			
+    			System.out.println("  [B] Non");
+    			
+    	    	String choiceReserv = "";
+    			
+    			choiceReserv = in.next();
+    			
+    			
+    			if (choiceReserv.toUpperCase().equals("A")) {
+    				
+    		    	LocalDate localDateA;
+    		    	LocalDate localDateD;
+    		    	String dateA;
+    		    	String dateD;
+    				
+    				System.out.println(" Merci d'indiquer votre date d'arrivée (AAAA-MM-DD) : ");
+    				dateA = in.next();
+    				localDateA = LocalDate.parse(dateA);
+    				
+    				System.out.println(" Merci d'indiquer votre date de départ (AAAA-MM-DD) : ");
+    				dateD = in.next();
+    				localDateD = LocalDate.parse(dateD);
+    				
+    				if (hotel[i].isFree(localDateA,localDateD)) {
+    					
+    			    	int codeCB = 0;
+    					
+    					System.out.println(" Veuillez entrer votre code de carte bancaire :");
+    					codeCB = in.nextInt();
+    					
+    			    	int indiceReserv = -1;
+    					
+    					indiceReserv = hotel[i].getAnEmptyReservation(hotel[i].getReservations());
+    					
+    					Reservation[] tabReserv = new Reservation[3]; 
+    					
+    					tabReserv = hotel[i].getReservations();
+    					
+    					tabReserv[indiceReserv] = new Reservation(localDateA, localDateD, user.getLogin());
+    					
+    					System.out.println("\n Votre réservation a bien été prise en compte! \n\n"); 
+    					    					
+    					i = hotel.length;
+    							
+    				}
+    				
+    				else {
+    					
+    					System.out.println(" Une réservation est déja enregistrée pendant cette période ou vos dates ne sont pas correctes \n");
+    					// relance la fonction de réservation
+    					
+    					i = hotel.length;
+    					
+    				} 
+    			}
+    			
+    			else {
+    				
+    				break;
+    			}			
+    		}
+    		
+    	}
+	}
 }

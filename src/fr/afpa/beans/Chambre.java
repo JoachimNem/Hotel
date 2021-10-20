@@ -127,6 +127,9 @@ public class Chambre{
     // FREE ROOM
     
     public boolean AreReservationsFull(){
+    	
+    	// IF TRUE ALORS IL RESTE AU MOINS UNE RESERVATION VIDE
+    	
         if(reservation[0] == null || reservation[1] == null || reservation[2] == null) {
         	return true;
         }
@@ -138,7 +141,7 @@ public class Chambre{
     // TOSTRING
     
     public String toString(){
-        return id + "\n" + type + "\n" + taille + "\n" + vue + "\n" + occupation + "\n" + tarif + " euros\n" + options + "\n";
+        return " Id : " + id + "\n\n Type de chambre : " + type + "\n\n Taille : " + taille + "\n\n Vue : " + vue + "\n\n Occupation : " + occupation + "\n\n Tarif : " + tarif + " euros\n\n Options : \n" + options + "\n\n";
     }
     
     // TESTS DE VERIFICATION DE CHAMBRES
@@ -163,5 +166,27 @@ public class Chambre{
     		return false;
     	}
     }
+    
+    public boolean areWeOut(Reservation reservation, LocalDate dateA, LocalDate dateD){
+        if(reservation == null) {
+            return true;
+        }
+        else if((!dateA.isAfter(reservation.getDateA()) && !dateA.isEqual(reservation.getDateA()) && !dateD.isBefore(reservation.getDateD()) )){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
+    public boolean isFree(LocalDate dateA, LocalDate dateD){
+        if(areWeOut(reservation[0], dateA, dateD) && areWeOut(reservation[1], dateA, dateD) && areWeOut(reservation[2], dateA, dateD)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }  
 
 }
